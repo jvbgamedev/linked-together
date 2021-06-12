@@ -1,0 +1,105 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Map Items/RespawnBox.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Player/Player Blue.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Camera.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Player/Player Green.tscn" type="PackedScene" id=5]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 508.218, 54.7179 )
+
+[sub_resource type="GDScript" id=2]
+script/source = "extends Node2D
+
+
+
+
+# Called when the node enters the scene tree for the first time.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+#func _process(delta):
+#	pass
+"
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player Green" parent="." instance=ExtResource( 5 )]
+position = Vector2( 235.412, 362.448 )
+speed = 750
+jump_speed = -1050
+gravity = 2500
+friction = 0.25
+acceleration = 0.5
+respawnPoint = NodePath("../Respawn Point")
+
+[node name="Player Blue" parent="." instance=ExtResource( 2 )]
+position = Vector2( 654.372, 366.367 )
+speed = 750
+jump_speed = -1050
+gravity = 2500
+friction = 0.25
+acceleration = 0.5
+respawnPoint = NodePath("../Respawn Point")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_left = 8.0
+margin_top = 488.0
+margin_right = 1024.0
+margin_bottom = 598.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ColorRect"]
+position = Vector2( 0, -489 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect/StaticBody2D"]
+position = Vector2( 508.949, 543.844 )
+shape = SubResource( 1 )
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+margin_left = 1131.44
+margin_top = 493.045
+margin_right = 2147.44
+margin_bottom = 603.045
+color = Color( 0.509804, 0.615686, 0.529412, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ColorRect2"]
+position = Vector2( 0, -489 )
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ColorRect2/StaticBody2D"]
+position = Vector2( 508.949, 543.844 )
+shape = SubResource( 1 )
+
+[node name="Respawn Point" type="Node2D" parent="."]
+position = Vector2( 106.09, 445.675 )
+script = SubResource( 2 )
+
+[node name="Camera2D" parent="." instance=ExtResource( 3 )]
+object1 = NodePath("../Player Green")
+object2 = NodePath("../Player Blue")
+
+[node name="RespawnBoxGreen" parent="." instance=ExtResource( 1 )]
+position = Vector2( 44.8985, 447.862 )
+
+[node name="CollisionShape2D" parent="RespawnBoxGreen" index="0"]
+position = Vector2( 2810.72, 597.207 )
+
+[node name="RespawnBoxBlue" parent="." instance=ExtResource( 1 )]
+position = Vector2( 44.8985, 447.862 )
+
+[node name="CollisionShape2D" parent="RespawnBoxBlue" index="0"]
+position = Vector2( 2810.72, 597.207 )
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+
+[connection signal="body_entered" from="RespawnBoxGreen" to="Player Green" method="_on_RespawnBoxGreen_body_entered"]
+[connection signal="body_entered" from="RespawnBoxBlue" to="Player Blue" method="_on_RespawnBoxBlue_body_entered"]
+
+[editable path="RespawnBoxGreen"]
+[editable path="RespawnBoxBlue"]
