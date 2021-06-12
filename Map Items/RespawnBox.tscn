@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 6834.01, 149.061 )
+
+[node name="RespawnBox" type="Area2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 2880.4, 1078.5 )
+shape = SubResource( 2 )

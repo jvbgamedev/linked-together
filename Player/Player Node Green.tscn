@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Player/Player Green.tscn" type="PackedScene" id=1]
+[ext_resource path="res://KinematicBody2D.gd" type="Script" id=2]
+[ext_resource path="res://Player node.gd" type="Script" id=3]
+
+[node name="Player Node Green" type="Node2D"]
+script = ExtResource( 3 )
+respawnPoint = NodePath("../Respawn Point")
+
+[node name="Player Green" type="KinematicBody2D" parent="." instance=ExtResource( 1 )]
+position = Vector2( 309.591, 351.121 )
+scale = Vector2( 0.1, 0.1 )
+collision_layer = 2
+collision_mask = 25
+script = ExtResource( 2 )
+speed = 500
+jump_speed = -959
+gravity = 2500
+friction = 0.209
+acceleration = 0.619
