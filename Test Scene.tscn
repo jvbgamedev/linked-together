@@ -84,22 +84,15 @@ script = SubResource( 2 )
 object1 = NodePath("../Player Green")
 object2 = NodePath("../Player Blue")
 
-[node name="RespawnBoxGreen" parent="." instance=ExtResource( 1 )]
+[node name="RespawnBox" parent="." instance=ExtResource( 1 )]
 position = Vector2( 44.8985, 447.862 )
 
-[node name="CollisionShape2D" parent="RespawnBoxGreen" index="0"]
-position = Vector2( 2810.72, 597.207 )
-
-[node name="RespawnBoxBlue" parent="." instance=ExtResource( 1 )]
-position = Vector2( 44.8985, 447.862 )
-
-[node name="CollisionShape2D" parent="RespawnBoxBlue" index="0"]
+[node name="CollisionShape2D" parent="RespawnBox" index="0"]
 position = Vector2( 2810.72, 597.207 )
 
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 
-[connection signal="body_entered" from="RespawnBoxGreen" to="Player Green" method="_on_RespawnBoxGreen_body_entered"]
-[connection signal="body_entered" from="RespawnBoxBlue" to="Player Blue" method="_on_RespawnBoxBlue_body_entered"]
+[connection signal="body_entered" from="RespawnBox" to="Player Green" method="_on_RespawnBox_body_entered"]
+[connection signal="body_entered" from="RespawnBox" to="Player Blue" method="_on_RespawnBoxBlue_body_entered"]
 
-[editable path="RespawnBoxGreen"]
-[editable path="RespawnBoxBlue"]
+[editable path="RespawnBox"]
